@@ -126,44 +126,43 @@ public class TestCases {
 
             for (int i = 0; i < actualDropDownValues.size(); i++) {
 
-                System.out.println("Actual: \n" + actualDropDownValues.get(i) );
+                System.out.println("Actual: \n" + actualDropDownValues.get(i));
                 System.out.println(" & Expected: \n" + expectedOptions.get(i));
-               // Assert.assertTrue(actualDropDownValues.get(i).equals(expectedOptions.get(i)));
+                // Assert.assertTrue(actualDropDownValues.get(i).equals(expectedOptions.get(i)));
 
             }
         }
     }
 
     @Test(priority = 8)
-    public  void SelectingPaymentOption()
-    {
+    public void SelectingPaymentOption() {
         driver.findElement(By.xpath("//a[@class='list with-promo']")).click();
         Methods.holdExecutionForSeconds(2);
         Assert.assertTrue(Methods.isDisplayedElement("//a[@class='button-main-content']"));
         Methods.holdExecutionForSeconds(2);
-         WebElement CardNumber =driver.findElement(By.xpath("//input[@name='cardnumber']"));
-         //CardNumber.clear();
+        WebElement CardNumber = driver.findElement(By.xpath("//input[@name='cardnumber']"));
+        //CardNumber.clear();
         Methods.holdExecutionForSeconds(3);
         CardNumber.sendKeys("4811111111111114");
-         Methods.holdExecutionForSeconds(2);
-         WebElement expiryDate= driver.findElement(By.xpath("//input[@placeholder='MM / YY']"));
-         Methods.holdExecutionForSeconds(2);
-         expiryDate.clear();
-         expiryDate.sendKeys("0222");
-         Methods.holdExecutionForSeconds(2);
-         WebElement Cvv= driver.findElement(By.xpath("//input[@placeholder='123']"));
-         Methods.holdExecutionForSeconds(2);
-         Cvv.clear();
-         Cvv.sendKeys("123");
-         Methods.holdExecutionForSeconds(2);
-         driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
-         Methods.holdExecutionForSeconds(3);
+        Methods.holdExecutionForSeconds(2);
+        WebElement expiryDate = driver.findElement(By.xpath("//input[@placeholder='MM / YY']"));
+        Methods.holdExecutionForSeconds(2);
+        expiryDate.clear();
+        expiryDate.sendKeys("0222");
+        Methods.holdExecutionForSeconds(2);
+        WebElement Cvv = driver.findElement(By.xpath("//input[@placeholder='123']"));
+        Methods.holdExecutionForSeconds(2);
+        Cvv.clear();
+        Cvv.sendKeys("123");
+        Methods.holdExecutionForSeconds(2);
+        driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
+        Methods.holdExecutionForSeconds(3);
 
 
     }
+/*
     @Test(priority = 9)
-    public void TransactionDetails()
-    {
+    public void TransactionDetails() {
         int size = driver.findElements(By.tagName("iframe")).size();
         driver.switchTo().frame(0);
 
@@ -183,13 +182,14 @@ public class TestCases {
         Assert.assertTrue(Methods.isDisplayedElement("//div[@class='final-panel failed']//div[@class='text-failed text-bold']"));
 
 
-       // driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
+        // driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
 
 
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='text-failed text-bold']")));
 //        Assert.assertTrue(Methods.isDisplayedElement("//div[@class='text-failed text-bold']"));
-    }
-//    @Test
+    }*/
+
+    //    @Test
 //    public void MidTransPillow()
 //    {
 //         Assert.assertTrue(Methods.isDisplayedElement("//span[text()='20,000']"));
@@ -225,4 +225,140 @@ public class TestCases {
 //
 //
 //    }
-}
+    @Test(priority = 9)
+    public void ClickOnOkButtonWithRightOTP() {
+        {
+            int size = driver.findElements(By.tagName("iframe")).size();
+            driver.switchTo().frame(0);
+
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            WebElement element1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row page-header']")));
+
+            Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Merchant Name:']"));
+            Methods.holdExecutionForSeconds(2);
+            Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Card Number:']"));
+            Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Amount:']"));
+            Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Transaction Time:']"));
+            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("112233");
+            Methods.holdExecutionForSeconds(2);
+            driver.findElement(By.xpath("//button[@type='submit']")).click();
+            Methods.holdExecutionForSeconds(3);
+            driver.switchTo().frame(0);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div [@class='trans-status trans-success']")));
+            Assert.assertTrue(Methods.isDisplayedElement("//div [@class='trans-status trans-success']"));
+
+        }
+    }
+
+    @Test(priority = 1)
+    public void MidTransPillow() {
+        Assert.assertTrue(Methods.isDisplayedElement("//span[text()='20,000']"));
+        Assert.assertTrue(Methods.isDisplayedElement("//a[@class='btn buy']"));
+    }
+
+    @Test(priority = 9)
+    public void TransactionDetails() {
+        driver.get(midTranBase.properties.getProperty("url"));
+        int size = driver.findElements(By.tagName("iframe")).size();
+        driver.switchTo().frame(0);
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement element1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row page-header']")));
+
+        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Merchant Name:']"));
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Card Number:']"));
+        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Amount:']"));
+        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Transaction Time:']"));
+        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("1122334");
+        Methods.holdExecutionForSeconds(2);
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        Methods.holdExecutionForSeconds(3);
+        driver.switchTo().frame(0);
+        Assert.assertTrue(Methods.isDisplayedElement("//div[@class='final-panel failed']//div[@class='text-failed text-bold']"));
+        Assert.assertTrue(Methods.isDisplayedElement("//div[@class='text-failed text-bold']"));
+    }
+
+    @Test
+    public void ClickOnOkButtonWithWrongOTP() {
+
+        driver.get(midTranBase.properties.getProperty("url"));
+        driver.findElement(By.xpath("//a[@class='btn buy']")).click();
+        Methods.holdExecutionForSeconds(2);
+        driver.findElement(By.xpath("//div[@class='cart-checkout']")).click();
+
+        int size = driver.findElements(By.tagName("iframe")).size();
+        driver.switchTo().frame(0);
+        Methods.holdExecutionForSeconds(2);
+        driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
+        driver.findElement(By.xpath("//a[@class='list with-promo']")).click();
+        WebElement CardNumber = driver.findElement(By.xpath("//input[@name='cardnumber']"));
+        //CardNumber.clear();
+        Methods.holdExecutionForSeconds(3);
+        CardNumber.sendKeys("4811111111111114");
+        Methods.holdExecutionForSeconds(2);
+        WebElement expiryDate = driver.findElement(By.xpath("//input[@placeholder='MM / YY']"));
+        Methods.holdExecutionForSeconds(2);
+        expiryDate.clear();
+        expiryDate.sendKeys("0222");
+        Methods.holdExecutionForSeconds(2);
+        WebElement Cvv = driver.findElement(By.xpath("//input[@placeholder='123']"));
+        Methods.holdExecutionForSeconds(2);
+        Cvv.clear();
+        Cvv.sendKeys("123");
+        Methods.holdExecutionForSeconds(2);
+        driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
+        driver.switchTo().frame(0);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row page-header']")));
+        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("1122334");
+        Methods.holdExecutionForSeconds(2);
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        Methods.holdExecutionForSeconds(3);
+        driver.switchTo().frame(0);
+        Assert.assertTrue(Methods.isDisplayedElement("//div[@class='final-panel failed']//div[@class='text-failed text-bold']"));
+
+        }
+        @Test
+    public void ClickingOnCancelButton()
+        {
+            driver.get(midTranBase.properties.getProperty("url"));
+            driver.findElement(By.xpath("//a[@class='btn buy']")).click();
+            Methods.holdExecutionForSeconds(2);
+            driver.findElement(By.xpath("//div[@class='cart-checkout']")).click();
+
+            int size = driver.findElements(By.tagName("iframe")).size();
+            driver.switchTo().frame(0);
+            Methods.holdExecutionForSeconds(2);
+            driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
+            driver.findElement(By.xpath("//a[@class='list with-promo']")).click();
+            WebElement CardNumber = driver.findElement(By.xpath("//input[@name='cardnumber']"));
+            //CardNumber.clear();
+            Methods.holdExecutionForSeconds(3);
+            CardNumber.sendKeys("4811111111111114");
+            Methods.holdExecutionForSeconds(2);
+            WebElement expiryDate = driver.findElement(By.xpath("//input[@placeholder='MM / YY']"));
+            Methods.holdExecutionForSeconds(2);
+            expiryDate.clear();
+            expiryDate.sendKeys("0222");
+            Methods.holdExecutionForSeconds(2);
+            WebElement Cvv = driver.findElement(By.xpath("//input[@placeholder='123']"));
+            Methods.holdExecutionForSeconds(2);
+            Cvv.clear();
+            Cvv.sendKeys("123");
+            Methods.holdExecutionForSeconds(2);
+            driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
+            driver.switchTo().frame(0);
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row page-header']")));
+            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("1122334");
+            Methods.holdExecutionForSeconds(2);
+            driver.findElement(By.xpath("//button[@name='cancel']")).click();
+            Methods.holdExecutionForSeconds(3);
+            driver.switchTo().frame(0);
+            Assert.assertTrue(Methods.isDisplayedElement("//div[@class='final-panel failed']//div[@class='text-failed text-bold']"));
+
+        }
+    }
+
+
