@@ -1,18 +1,17 @@
 package TestCases;
 
 import DriverSetup.Setup;
-import MidTrans.Checkout;
-import MidTrans.MidTranBase;
-import MidTrans.OrderSummary;
-import MidTrans.Payment;
+import MidTrans.*;
 import Predefined.Methods;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.swing.plaf.metal.MetalToggleButtonUI;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,75 +23,86 @@ public class TestCases {
     Checkout Checkout;
     OrderSummary OrderSummary;
     Payment Payment;
+    DebitClass DebitClass;
 
 
     @BeforeClass
     public void tearUp() {
         driver = Setup.LaunchBrowser("chrome");
         midTranBase = new MidTranBase(driver);
-        driver.get(midTranBase.properties.getProperty("url"));
+
         Checkout = new Checkout(driver);
         OrderSummary = new OrderSummary(driver);
         Payment = new Payment(driver);
+        DebitClass =new DebitClass(driver);
 
 
     }
+    @BeforeMethod
+    public void startup()
+    {
+        driver.get(midTranBase.properties.getProperty("url"));
+    }
 //
-//    @Test(priority = 1)
-//    public void BuyNowRedirectToCheckoutPopUp() {
-//        midTranBase.BuyNowButtonFunction();
-//        Assert.assertTrue(Methods.isDisplayedElement("//div[@class='cart-content buying']"));
-//        Methods.holdExecutionForSeconds(2);
-//
-//    }
-//
+    @Test(priority = 2)
+    public void BuyNowRedirectToCheckoutPopUp() {
+        midTranBase.BuyNowButtonFunction();
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//div[@class='cart-content buying']"));
+        Methods.holdExecutionForSeconds(2);
+
+    }
+
 //    @Test(priority = 2)
-//    public void CheckoutPopUpElementsVisibility() {
-//        Methods.holdExecutionForSeconds(1);
-//        // midTranBase.BuyNowButtonFunction();
-//        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Name']"));
-//        Methods.holdExecutionForSeconds(1);
-//        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Email']"));
-//        Methods.holdExecutionForSeconds(1);
-//        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Phone no']"));
-//        Methods.holdExecutionForSeconds(1);
-//        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='City']"));
-//        Methods.holdExecutionForSeconds(1);
-//        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Address']"));
-//        Methods.holdExecutionForSeconds(1);
-//        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Postal Code']"));
-//        Methods.holdExecutionForSeconds(1);
-//    }
 //
-//    @Test(priority = 3)
-//    public void FillingDetails() {
-//        // midTranBase.BuyNowButtonFunction();
-//        Checkout.CheckoutPopDetails();
-//        Methods.holdExecutionForSeconds(3);
 //
-//    }
+    @Test(priority = 4)
+    public void FillingDetails() {
+
+    driver.get(MidTranBase.properties.getProperty("url"));
+        Checkout.CheckoutPopDetails();
+        Methods.holdExecutionForSeconds(3);
+
+    }
 //
-//    @Test(priority = 4)
-//    public void CheckOutButton() {
-//        Methods.holdExecutionForSeconds(2);
-//        Checkout.ClickingCheckOutButton();
-//        Methods.holdExecutionForSeconds(2);
-//        Assert.assertTrue(Methods.isDisplayedElement("//p[text()='Order Summary']"));
-//        Methods.holdExecutionForSeconds(2);
-//    }
+    @Test(priority = 5)
+    public void CheckOutButton() {
+        Methods.holdExecutionForSeconds(2);
+        Checkout.ClickingCheckOutButton();
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//p[text()='Order Summary']"));
+        Methods.holdExecutionForSeconds(2);
+    }
 //
-//    @Test(priority = 5)
-//    public void OrderSummaryProductDetail() {
-//        Methods.holdExecutionForSeconds(2);
-//        // OrderSummary.orderSummary();
-//        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='table-amount text-body']"));
-//        Assert.assertTrue(Methods.isDisplayedElement("//span[@class='item-name']"));
-//    }
+    @Test(priority = 6)
+    public void OrderSummaryProductDetail() {
+        driver.get(MidTranBase.properties.getProperty("url"));
+        Methods.holdExecutionForSeconds(2);
+        OrderSummary.orderSummaryElement();
+        driver.switchTo().frame(0);
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='table-amount text-body']"));
+        Assert.assertTrue(Methods.isDisplayedElement("//span[@class='item-name']"));
+    }
 //
-//    @Test(priority = 6)
-//    public void ContinueButton() {
-//        driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
-//    }
+    @Test(priority = 7)
+    public void ContinueButton() {
+        driver.get(MidTranBase.properties.getProperty("url"));
+        OrderSummary.ClickingOnContinueButton();
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//p[@class='text-page-title-content']"));
+    }
+
+    @Test(priority = 9)
+    public void CheckingSelectingPaymentOptionRedirectToCardDetailScreen()
+    {
+        DebitClass.SelectingCreditCardAsAPayment();
+        Assert.assertTrue(Methods.isDisplayedElement("//input[@name='cardnumber']"));
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//input[@placeholder='MM / YY']"));
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//input[@placeholder='123']"));
+    }
 //
 //    @Test(priority = 7)
 //    public void paymentOptionsAvailable() {
@@ -138,39 +148,38 @@ public class TestCases {
 //    }
 //
 //    @Test(priority = 8)
-//    public void SelectingPaymentOption() {
-//        driver.findElement(By.xpath("//a[@class='list with-promo']")).click();
-//        Methods.holdExecutionForSeconds(2);
-//        Assert.assertTrue(Methods.isDisplayedElement("//a[@class='button-main-content']"));
-//        Methods.holdExecutionForSeconds(2);
-//        WebElement CardNumber = driver.findElement(By.xpath("//input[@name='cardnumber']"));
-//        //CardNumber.clear();
-//        Methods.holdExecutionForSeconds(3);
-//        CardNumber.sendKeys("4811111111111114");
-//        Methods.holdExecutionForSeconds(2);
-//        WebElement expiryDate = driver.findElement(By.xpath("//input[@placeholder='MM / YY']"));
-//        Methods.holdExecutionForSeconds(2);
-//        expiryDate.clear();
-//        expiryDate.sendKeys("0222");
-//        Methods.holdExecutionForSeconds(2);
-//        WebElement Cvv = driver.findElement(By.xpath("//input[@placeholder='123']"));
-//        Methods.holdExecutionForSeconds(2);
-//        Cvv.clear();
-//        Cvv.sendKeys("123");
-//        Methods.holdExecutionForSeconds(2);
-//        driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
-//        Methods.holdExecutionForSeconds(3);
-//
-//
-//    }
 //
 //
 //
-//    @Test(priority = 1)
-//    public void MidTransPillow() {
-//        Assert.assertTrue(Methods.isDisplayedElement("//span[text()='20,000']"));
-//        Assert.assertTrue(Methods.isDisplayedElement("//a[@class='btn buy']"));
-//    }
+//
+    @Test(priority = 1)
+    public void MidTransPillow() {
+       driver.get(MidTranBase.properties.getProperty("url"));
+       midTranBase.BuyNowButtonFunction();
+        Assert.assertTrue(Methods.isDisplayedElement("//td[text()='Midtrans Pillow']"));
+        Assert.assertTrue(Methods.isDisplayedElement("//td[text()='20,000']"));
+    }
+    @Test(priority = 11)
+    public void EnteringCardDetails()
+    {
+       // DebitClass.SelectingCreditCardAsAPayment();
+        DebitClass.EnteringCreditCardDetails();
+    }
+
+    @Test(priority = 12)
+    public void ActionAfterClickingOnPayNowButton()
+    {
+        DebitClass.CheckingPayNowButtonWorking();
+        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Merchant Name:']"));
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Amount:']"));
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Transaction Time:']"));
+        Methods.holdExecutionForSeconds(2);
+        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Card Number:']"));
+
+
+    }
 //
 //    @Test(priority = 12)
 //    public void TransactionDetails() {
@@ -215,7 +224,7 @@ public class TestCases {
 //                System.out.println(link.getText() + " - " + link.getAttribute("text"));
 //            }
 //        }
-    @Test(priority = 3)
+    @Test(priority = 15)
     public void ClickOnCancelButton()
     {
         driver.get(midTranBase.properties.getProperty("url"));
@@ -223,7 +232,7 @@ public class TestCases {
         Assert.assertTrue(Methods.isDisplayedElement("//div[@class='text-failed text-bold']"));
 
     }
-    @Test(priority = 2)
+    @Test(priority = 14)
     public  void clickOkWithRightOtp()
     {
         driver.get(midTranBase.properties.getProperty("url"));
@@ -233,12 +242,31 @@ public class TestCases {
         Assert.assertTrue(Methods.isDisplayedElement("//div[@class='trans-status trans-success']"));
 
     }
-    @Test(priority = 1)
+    @Test(priority = 13)
     public void ClickOkButtonWrongPasskey()
     {
+        driver.get(MidTranBase.properties.getProperty("url"));
         Payment.ClickOnOkButtonWithWrongOtp();
         Assert.assertTrue(Methods.isDisplayedElement("//div[@class='final-panel failed']//div[@class='text-failed text-bold']"));
 
+    }
+    @Test(priority = 8)
+     public void VisibilityOfCheckoutPopUp()
+    {
+        driver.get(MidTranBase.properties.getProperty("url"));
+        Checkout.CheckoutPopUpElementsVisibility();
+        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Name']"));
+        Methods.holdExecutionForSeconds(1);
+        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Email']"));
+        Methods.holdExecutionForSeconds(1);
+        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Phone no']"));
+        Methods.holdExecutionForSeconds(1);
+        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='City']"));
+        Methods.holdExecutionForSeconds(1);
+        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Address']"));
+        Methods.holdExecutionForSeconds(1);
+        Assert.assertTrue(Methods.isDisplayedElement("//td[@class='input-label'][normalize-space()='Postal Code']"));
+        Methods.holdExecutionForSeconds(1);
     }
 
     }

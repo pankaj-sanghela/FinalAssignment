@@ -48,16 +48,16 @@ public class Payment extends MidTranBase{
         ContinueButton.click();
         CreditCardButton.click();
         Methods.holdExecutionForSeconds(3);
-        CardNumber.sendKeys("4811111111111114");
+        CardNumber.sendKeys(MidTranBase.properties.getProperty("cardNumber"));
         Methods.holdExecutionForSeconds(2);
 
         Methods.holdExecutionForSeconds(2);
         ExpiryDate.clear();
-        ExpiryDate.sendKeys("0222");
+        ExpiryDate.sendKeys(MidTranBase.properties.getProperty("ExpiryDate"));
         Methods.holdExecutionForSeconds(2);
 
         Cvv.clear();
-        Cvv.sendKeys("123");
+        Cvv.sendKeys(MidTranBase.properties.getProperty("Cvv"));
         Methods.holdExecutionForSeconds(2);
         PayNowButton.click();
         driver.switchTo().frame(0);
@@ -83,23 +83,23 @@ public class Payment extends MidTranBase{
         ContinueButton.click();
         CreditCardButton.click();
         Methods.holdExecutionForSeconds(3);
-        CardNumber.sendKeys("4811111111111114");
+        CardNumber.sendKeys(MidTranBase.properties.getProperty("cardNumber"));
         Methods.holdExecutionForSeconds(2);
 
         Methods.holdExecutionForSeconds(2);
         ExpiryDate.clear();
-        ExpiryDate.sendKeys("0222");
+        ExpiryDate.sendKeys(MidTranBase.properties.getProperty("ExpiryDate"));
         Methods.holdExecutionForSeconds(2);
 
         Cvv.clear();
-        Cvv.sendKeys("123");
+        Cvv.sendKeys(MidTranBase.properties.getProperty("Cvv"));
         Methods.holdExecutionForSeconds(2);
         PayNowButton.click();
         driver.switchTo().frame(0);
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row page-header']")));
         Methods.holdExecutionForSeconds(2);
-        OTP.sendKeys("112233");
+        OTP.sendKeys(MidTranBase.properties.getProperty("ValidOtp"));
         Methods.holdExecutionForSeconds(2);
         SubmitButton.click();
         Methods.holdExecutionForSeconds(3);
@@ -122,23 +122,23 @@ public class Payment extends MidTranBase{
         ContinueButton.click();
         CreditCardButton.click();
         Methods.holdExecutionForSeconds(3);
-        CardNumber.sendKeys("4811111111111114");
+        CardNumber.sendKeys(MidTranBase.properties.getProperty("cardNumber"));
         Methods.holdExecutionForSeconds(2);
 
         Methods.holdExecutionForSeconds(2);
         ExpiryDate.clear();
-        ExpiryDate.sendKeys("0222");
+        ExpiryDate.sendKeys(MidTranBase.properties.getProperty("ExpiryDate"));
         Methods.holdExecutionForSeconds(2);
 
         Cvv.clear();
-        Cvv.sendKeys("123");
+        Cvv.sendKeys(MidTranBase.properties.getProperty("Cvv"));
         Methods.holdExecutionForSeconds(2);
         PayNowButton.click();
         driver.switchTo().frame(0);
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row page-header']")));
         Methods.holdExecutionForSeconds(2);
-        OTP.sendKeys("1122334");
+        OTP.sendKeys(MidTranBase.properties.getProperty("InvalidOtp"));
         Methods.holdExecutionForSeconds(2);
         SubmitButton.click();
         Methods.holdExecutionForSeconds(3);

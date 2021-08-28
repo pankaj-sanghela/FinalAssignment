@@ -1,5 +1,6 @@
 package MidTrans;
 
+import Predefined.Methods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,11 +16,25 @@ public class OrderSummary extends MidTranBase{
     WebElement Price;
     @FindBy(xpath = "//span[@class='item-name']")
     WebElement ProductName;
-    public void orderSummary()
+    @FindBy(xpath = "//div[text()='CHECKOUT']")
+    WebElement CheckoutButton;
+    @FindBy(xpath = "//a[@class='button-main-content']")
+    WebElement ContinueButton;
+    public void orderSummaryElement()
     {
-//        int size = driver.findElements(By.tagName("iframe")).size();
-//        driver.switchTo().frame(0);
+    BuyNowButton.click();
+    Methods.holdExecutionForSeconds(2);
+    CheckoutButton.click();
 
+    }
+    public void ClickingOnContinueButton()
+    {
+        BuyNowButton.click();
+        Methods.holdExecutionForSeconds(2);
+        CheckoutButton.click();
+        driver.switchTo().frame(0);
+        Methods.holdExecutionForSeconds(2);
+        ContinueButton.click();
 
     }
 }

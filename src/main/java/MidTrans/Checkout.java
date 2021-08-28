@@ -37,27 +37,26 @@ public class Checkout extends  MidTranBase{
     WebElement AddressInput;
     @FindBy(xpath = "//tr[@class='table-content']//input[@value='10220']")
     WebElement PostalCodeInput;
-    @FindBy(xpath = "//div[text()='CHECKOUT']")
-    WebElement CheckoutButton;
+
     @FindBy(xpath = "//p[text()='Order Summary']")
     WebElement OrderSummaryPopUp;
 
 
    public void CheckoutPopDetails()
    {
-       //BuyNowButton.click();
+       BuyNowButton.click();
        NameInput.clear();
-       NameInput.sendKeys("pankaj");
+       NameInput.sendKeys(MidTranBase.properties.getProperty("Name"));
        EmailInput.clear();
-       EmailInput.sendKeys("pankajsanghela@gmain.com");
+       EmailInput.sendKeys(MidTranBase.properties.getProperty("email"));
        PhoneInput.clear();
-       PhoneInput.sendKeys("9599366935");
+       PhoneInput.sendKeys(MidTranBase.properties.getProperty("mobile"));
        CityInput.clear();
-       CityInput.sendKeys("delhi");
+       CityInput.sendKeys(MidTranBase.properties.getProperty("city"));
        AddressInput.clear();
-       AddressInput.sendKeys("kaushik enclave burari delhi");
+       AddressInput.sendKeys(MidTranBase.properties.getProperty("address"));
        PostalCodeInput.clear();
-       PostalCodeInput.sendKeys("110084");
+       PostalCodeInput.sendKeys(MidTranBase.properties.getProperty("postal code"));
 
    }
    public void ClickingCheckOutButton()
@@ -69,6 +68,11 @@ public class Checkout extends  MidTranBase{
        driver.switchTo().frame(0);
 
    }
+    public void CheckoutPopUpElementsVisibility() {
+        Methods.holdExecutionForSeconds(1);
+        BuyNowButton.click();
+
+    }
 
 
 

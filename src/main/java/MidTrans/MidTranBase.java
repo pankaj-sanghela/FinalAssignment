@@ -34,6 +34,8 @@ public class MidTranBase {
     WebElement BuyNowButton;
 //    @FindBy(xpath = "//tr[@class='table-content']//input[@value='Budi']")
 //    WebElement NameInput;
+@FindBy(xpath = "//div[text()='CHECKOUT']")
+WebElement CheckoutButton;
 
 
  public void BuyNowButtonFunction()
