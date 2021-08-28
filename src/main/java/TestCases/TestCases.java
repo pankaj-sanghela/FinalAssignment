@@ -109,49 +109,53 @@ public class TestCases {
         Assert.assertTrue(Methods.isDisplayedElement("//input[@placeholder='123']"));
     }
 //
-//    @Test(priority = 7)
-//    public void paymentOptionsAvailable() {
-//        {
-////            midTranBase.BuyNowButtonFunction();
-////            Checkout.ClickingCheckOutButton();
-//            driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
-//
-//            driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
-//            List<WebElement> options = driver.findElements(By.xpath("//div[@id='payment-list']"));
-//            System.out.println(options.size());
-//            List actualDropDownValues = new ArrayList();
-//            for (WebElement e2 : options) {
-//                actualDropDownValues.add(e2.getText());
-//
-//            }
-//
-//
-//            List expectedOptions = new ArrayList();
-//            expectedOptions.add("Credit/Debit Card");
-//            expectedOptions.add("ATM/Bank Transfer");
-//            expectedOptions.add("GoPay/other e-Wallets");
-//            expectedOptions.add("ShopeePay/other e-Wallets");
-//            expectedOptions.add("KlikBCA");
-//            expectedOptions.add("BCA KlikPay");
-//            expectedOptions.add("OCTO Clicks");
-//            expectedOptions.add("Danamon Online Banking");
-//            expectedOptions.add("e-Pay BRI");
-//            expectedOptions.add("LINE Pay e-cash | mandiri e-cash");
-//            expectedOptions.add("Telkomsel Cash");
-//            expectedOptions.add("Indomaret");
-//            expectedOptions.add("Alfa Group");
-//            expectedOptions.add("Akulaku");
-//
-//            for (int i = 0; i < actualDropDownValues.size(); i++) {
-//
-//                System.out.println("Actual: \n" + actualDropDownValues.get(i));
-//                System.out.println(" & Expected: \n" + expectedOptions.get(i));
-//                // Assert.assertTrue(actualDropDownValues.get(i).equals(expectedOptions.get(i)));
-//
-//            }
-//        }
-//    }
-//
+    @Test(priority = 7)
+    public void paymentOptionsAvailable() {
+        {
+            midTranBase.BuyNowButtonFunction();
+            Methods.holdExecutionForSeconds(2);
+           driver.findElement(By.xpath("//div[@class='cart-checkout']")).click();
+            Methods.holdExecutionForSeconds(2);
+           driver.switchTo().frame(0);
+            driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
+
+
+            List<WebElement> options = driver.findElements(By.xpath("//div[@class='content-list']"));
+            //System.out.println(options.size());
+            List actualDropDownValues = new ArrayList();
+            for (WebElement e2 : options) {
+                actualDropDownValues.add(e2.getTagName());
+                System.out.println(e2.getText());
+
+            }
+
+
+            List expectedOptions = new ArrayList();
+            expectedOptions.add("Credit/Debit Card");
+            expectedOptions.add("ATM/Bank Transfer");
+            expectedOptions.add("GoPay/other e-Wallets");
+            expectedOptions.add("ShopeePay/other e-Wallets");
+            expectedOptions.add("KlikBCA");
+            expectedOptions.add("BCA KlikPay");
+            expectedOptions.add("OCTO Clicks");
+            expectedOptions.add("Danamon Online Banking");
+            expectedOptions.add("e-Pay BRI");
+            expectedOptions.add("LINE Pay e-cash | mandiri e-cash");
+            expectedOptions.add("Telkomsel Cash");
+            expectedOptions.add("Indomaret");
+            expectedOptions.add("Alfa Group");
+            expectedOptions.add("Akulaku");
+
+            for (int i = 0; i < expectedOptions.size(); i++) {
+
+                //System.out.println("Actual: \n" + actualDropDownValues.get(i));
+                System.out.println(" & Expected: \n" + expectedOptions.get(i));
+                // Assert.assertTrue(actualDropDownValues.get(i).equals(expectedOptions.get(i)));
+
+            }
+        }
+    }
+
 
     @Test(priority = 1)
     public void MidTransPillow() {
@@ -195,6 +199,7 @@ public class TestCases {
             Methods.holdExecutionForSeconds(2);
             driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
             List<WebElement> allLinks = driver.findElements(By.tagName("a"));
+            System.out.println(allLinks.size());
 
             //Traversing through the list and printing its text along with link address
             for(WebElement link:allLinks){
