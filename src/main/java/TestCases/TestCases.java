@@ -47,12 +47,10 @@ public class TestCases {
         driver.get(midTranBase.properties.getProperty("url"));
     }
 //
-    @Test
+    @Test(priority = 10)
     public void PromoCodeAmountCheck()
     {
         PromoCode.PromoCodeAmount();
-//        String Expected="19,900";
-
     }
     @Test(priority = 2)
     public void BuyNowRedirectToCheckoutPopUp() {
