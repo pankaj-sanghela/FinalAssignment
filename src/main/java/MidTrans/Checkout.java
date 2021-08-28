@@ -56,11 +56,13 @@ public class Checkout extends  MidTranBase{
        AddressInput.clear();
        AddressInput.sendKeys(MidTranBase.properties.getProperty("address"));
        PostalCodeInput.clear();
-       PostalCodeInput.sendKeys(MidTranBase.properties.getProperty("postal code"));
+       PostalCodeInput.sendKeys(MidTranBase.properties.getProperty("postal"));
 
    }
    public void ClickingCheckOutButton()
    {
+       BuyNowButton.click();
+       Methods.holdExecutionForSeconds(2);
        CheckoutButton.click();
 
        int size = driver.findElements(By.tagName("iframe")).size();

@@ -24,6 +24,8 @@ public class TestCases {
     OrderSummary OrderSummary;
     Payment Payment;
     DebitClass DebitClass;
+    PromoCode PromoCode;
+
 
 
     @BeforeClass
@@ -35,6 +37,7 @@ public class TestCases {
         OrderSummary = new OrderSummary(driver);
         Payment = new Payment(driver);
         DebitClass =new DebitClass(driver);
+        PromoCode =new PromoCode(driver);
 
 
     }
@@ -44,6 +47,13 @@ public class TestCases {
         driver.get(midTranBase.properties.getProperty("url"));
     }
 //
+    @Test
+    public void PromoCodeAmountCheck()
+    {
+        PromoCode.PromoCodeAmount();
+//        String Expected="19,900";
+
+    }
     @Test(priority = 2)
     public void BuyNowRedirectToCheckoutPopUp() {
         midTranBase.BuyNowButtonFunction();
@@ -53,9 +63,6 @@ public class TestCases {
 
     }
 
-//    @Test(priority = 2)
-//
-//
     @Test(priority = 4)
     public void FillingDetails() {
 
@@ -147,11 +154,7 @@ public class TestCases {
 //        }
 //    }
 //
-//    @Test(priority = 8)
-//
-//
-//
-//
+
     @Test(priority = 1)
     public void MidTransPillow() {
        driver.get(MidTranBase.properties.getProperty("url"));
@@ -180,54 +183,30 @@ public class TestCases {
 
 
     }
-//
-//    @Test(priority = 12)
-//    public void TransactionDetails() {
-//        driver.get(midTranBase.properties.getProperty("url"));
-//        int size = driver.findElements(By.tagName("iframe")).size();
-//        driver.switchTo().frame(0);
-//
-//        WebDriverWait wait = new WebDriverWait(driver, 30);
-//        WebElement element1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row page-header']")));
-//
-//        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Merchant Name:']"));
-//        Methods.holdExecutionForSeconds(2);
-//        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Card Number:']"));
-//        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Amount:']"));
-//        Assert.assertTrue(Methods.isDisplayedElement("//label[text()='Transaction Time:']"));
-//        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("1122334");
-//        Methods.holdExecutionForSeconds(2);
-//        driver.findElement(By.xpath("//button[@type='submit']")).click();
-//        Methods.holdExecutionForSeconds(3);
-//        driver.switchTo().frame(0);
-//        Assert.assertTrue(Methods.isDisplayedElement("//div[@class='final-panel failed']//div[@class='text-failed text-bold']"));
-//        Assert.assertTrue(Methods.isDisplayedElement("//div[@class='text-failed text-bold']"));
-//    }
 
+        @Test(priority = 8)
+        public void FetchingLinksOfPayment()
+        {
+           // driver.get(midTranBase.properties.getProperty("url"));
+            driver.findElement(By.xpath("//a[@class='btn buy']")).click();
+            Methods.holdExecutionForSeconds(2);
+            driver.findElement(By.xpath("//div[@class='cart-checkout']")).click();
 
-//        @Test
-//        public void FetchingLinksOfPayment()
-//        {
-//           // driver.get(midTranBase.properties.getProperty("url"));
-//            driver.findElement(By.xpath("//a[@class='btn buy']")).click();
-//            Methods.holdExecutionForSeconds(2);
-//            driver.findElement(By.xpath("//div[@class='cart-checkout']")).click();
-//
-//            int size = driver.findElements(By.tagName("iframe")).size();
-//            driver.switchTo().frame(0);
-//            Methods.holdExecutionForSeconds(2);
-//            driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
-//            List<WebElement> allLinks = driver.findElements(By.xpath("//div[@class='page-container scroll']//div[@class='list-title text-actionable-bold']"));
-//
-//            //Traversing through the list and printing its text along with link address
-//            for(WebElement link:allLinks){
-//                System.out.println(link.getText() + " - " + link.getAttribute("text"));
-//            }
-//        }
+            int size = driver.findElements(By.tagName("iframe")).size();
+            driver.switchTo().frame(0);
+            Methods.holdExecutionForSeconds(2);
+            driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
+            List<WebElement> allLinks = driver.findElements(By.tagName("a"));
+
+            //Traversing through the list and printing its text along with link address
+            for(WebElement link:allLinks){
+                System.out.println(link.getText());
+            }
+        }
     @Test(priority = 15)
     public void ClickOnCancelButton()
     {
-        driver.get(midTranBase.properties.getProperty("url"));
+           driver.get(midTranBase.properties.getProperty("url"));
         Payment.ClickOnCancelButton();
         Assert.assertTrue(Methods.isDisplayedElement("//div[@class='text-failed text-bold']"));
 

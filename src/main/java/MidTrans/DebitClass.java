@@ -16,8 +16,7 @@ public class DebitClass extends MidTranBase{
     }
     @FindBy(xpath = "//a[@class='button-main-content']")
     WebElement ContinueButton;
-    @FindBy(xpath = "//div[text()='Credit/Debit Card']")
-    WebElement CreditCardButton;
+
     @FindBy(xpath = "//input[@name='cardnumber']")
     WebElement CardNumber;
     @FindBy(xpath = "//input[@placeholder='MM / YY']")

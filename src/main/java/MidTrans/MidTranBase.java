@@ -1,6 +1,7 @@
 package MidTrans;
 
 import DriverSetup.Setup;
+import Predefined.Methods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +10,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
+import java.lang.reflect.Method;
 import java.util.Properties;
 
 
@@ -32,16 +34,16 @@ public class MidTranBase {
     }
     @FindBy(xpath = "//a[normalize-space()='BUY NOW']")
     WebElement BuyNowButton;
-//    @FindBy(xpath = "//tr[@class='table-content']//input[@value='Budi']")
-//    WebElement NameInput;
 @FindBy(xpath = "//div[text()='CHECKOUT']")
 WebElement CheckoutButton;
+    @FindBy(xpath = "//div[text()='Credit/Debit Card']")
+    WebElement CreditCardButton;
 
 
  public void BuyNowButtonFunction()
  {
-
      BuyNowButton.click();
+
  }
 
 }
