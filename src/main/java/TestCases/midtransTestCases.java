@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestCases {
+public class midtransTestCases {
 
     public WebDriver driver;
     MidTranBase midTranBase;
@@ -120,11 +120,11 @@ public class TestCases {
             driver.findElement(By.xpath("//a[@class='button-main-content']")).click();
 
 
-            List<WebElement> options = driver.findElements(By.xpath("//div[@class='content-list']"));
+            List<WebElement> options = driver.findElements(By.xpath("//div[@id='payment-list']//a[@href='#/credit-card']//div[@class='list-title text-actionable-bold']"));
             //System.out.println(options.size());
             List actualDropDownValues = new ArrayList();
             for (WebElement e2 : options) {
-                actualDropDownValues.add(e2.getTagName());
+                actualDropDownValues.add(e2.getText());
                 System.out.println(e2.getText());
 
             }

@@ -95,6 +95,7 @@ public class Payment extends MidTranBase{
         Cvv.sendKeys(MidTranBase.properties.getProperty("Cvv"));
         Methods.holdExecutionForSeconds(2);
         PayNowButton.click();
+        Methods.holdExecutionForSeconds(2);
         driver.switchTo().frame(0);
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row page-header']")));
@@ -104,6 +105,7 @@ public class Payment extends MidTranBase{
         SubmitButton.click();
         Methods.holdExecutionForSeconds(3);
         driver.switchTo().frame(0);
+        Methods.holdExecutionForSeconds(3);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='trans-status trans-success']")));
         Assert.assertTrue(Methods.isDisplayedElement("//div[@class='trans-status trans-success']"));
 
@@ -134,6 +136,7 @@ public class Payment extends MidTranBase{
         Cvv.sendKeys(MidTranBase.properties.getProperty("Cvv"));
         Methods.holdExecutionForSeconds(2);
         PayNowButton.click();
+        Methods.holdExecutionForSeconds(2);
         driver.switchTo().frame(0);
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row page-header']")));
@@ -143,6 +146,7 @@ public class Payment extends MidTranBase{
         SubmitButton.click();
         Methods.holdExecutionForSeconds(3);
         driver.switchTo().frame(0);
+        Methods.holdExecutionForSeconds(3);
         Assert.assertTrue(Methods.isDisplayedElement("//div[@class='final-panel failed']//div[@class='text-failed text-bold']"));
 
     }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [All Test Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="C:/Users/pankaj sanghela/IdeaProjects/FinalAssignment(failed)">
+    <classes>
+      <class name="TestCases.MainTestClass">
+        <methods>
+          <include name="clickOkWithRightOtp"/>
+          <include name="close"/>
+          <include name="tearUp"/>
+          <include name="startup"/>
+        </methods>
+      </class> <!-- TestCases.MainTestClass -->
+    </classes>
+  </test> <!-- C:/Users/pankaj sanghela/IdeaProjects/FinalAssignment(failed) -->
+</suite> <!-- Failed suite [All Test Suite] -->

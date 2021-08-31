@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [REGRESSION-TEST]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" name="test(failed)" verbose="0">
+    <groups>
+      <run>
+        <include name="smoke"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="TestCases.MainTestClass">
+        <methods>
+          <include name="EnteringCardDetails"/>
+          <include name="clickOkWithRightOtp"/>
+          <include name="tearUp"/>
+          <include name="startup"/>
+        </methods>
+      </class> <!-- TestCases.MainTestClass -->
+    </classes>
+  </test> <!-- test(failed) -->
+</suite> <!-- Failed suite [REGRESSION-TEST] -->
